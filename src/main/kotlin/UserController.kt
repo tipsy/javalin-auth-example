@@ -3,7 +3,7 @@ import java.util.*
 
 object UserController {
 
-    private data class User(val name: String, val email: String)
+    private data class User(val name: String = "", val email: String = "")
 
     private val users = hashMapOf(
             randomId() to User(name = "Alice", email = "alice@alice.kt"),
