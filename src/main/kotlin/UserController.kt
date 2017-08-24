@@ -32,6 +32,6 @@ object UserController {
         users.remove(ctx.param(":user-id")!!)
     }
 
-}
+    private fun randomId() = UUID.randomUUID().toString()
 
-fun randomId() = UUID.randomUUID().toString()
+}
