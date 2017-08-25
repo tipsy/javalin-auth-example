@@ -19,11 +19,11 @@ object Auth {
         }
     }
 
-    // get roles from userRoleMap after extracting username/password pairs from basic-auth header
+    // get roles from userRoleMap after extracting username/password from basic-auth header
     private val Context.userRoles: List<ApiRole>
         get() = try {
-            val credentials = String(Base64.getDecoder().decode(this.header("Authorization")!!.removePrefix("Basic "))).split(":")
-            userRoleMap[Pair(credentials[0], credentials[1])] ?: listOf() // return role for u/p, empty list if no roles found
+            val (username, password) = String(Base64.getDecoder().decode(this.header("Authorization")!!.removePrefix("Basic "))).split(":")
+            userRoleMap[Pair(username, password)] ?: listOf() // return role for u/p, empty list if no roles found
         } catch (e: Exception) {
             listOf()
         }
