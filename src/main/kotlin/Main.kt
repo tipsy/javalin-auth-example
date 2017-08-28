@@ -7,7 +7,7 @@ fun main(args: Array<String>) {
     val app = Javalin.create().apply {
         port(7000)
         accessManager(Auth::accessManager)
-    }.start();
+    }.start()
 
     app.routes {
         get("/", { ctx -> ctx.redirect("/users") })
