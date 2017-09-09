@@ -20,13 +20,9 @@ object Auth {
 
     // get roles from userRoleMap after extracting username/password from basic-auth header
     private val Context.userRoles: List<ApiRole>
-        get() = try {
-            this.basicAuthCredentials()!!.let {
-                userRoleMap[Pair(it.username, it.password)] ?: listOf()
-            }
-        } catch (e: Exception) {
-            listOf()
-        }
+        get() = this.basicAuthCredentials()?.let { (username, password) ->
+            userRoleMap[Pair(username, password)] ?: listOf()
+        } ?: listOf()
 
     // we'll store passwords in clear text (and in memory) for this example, but please don't
     // do this if you have actual users
