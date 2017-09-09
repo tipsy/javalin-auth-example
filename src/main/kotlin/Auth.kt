@@ -1,7 +1,6 @@
 import io.javalin.Context
 import io.javalin.Handler
 import io.javalin.security.Role
-import java.util.*
 
 enum class ApiRole : Role { ANYONE, USER_READ, USER_WRITE }
 
@@ -22,8 +21,9 @@ object Auth {
     // get roles from userRoleMap after extracting username/password from basic-auth header
     private val Context.userRoles: List<ApiRole>
         get() = try {
-            val (username, password) = String(Base64.getDecoder().decode(this.header("Authorization")!!.removePrefix("Basic "))).split(":")
-            userRoleMap[Pair(username, password)] ?: listOf() // return role for u/p, empty list if no roles found
+            this.basicAuthCredentials()!!.let {
+                userRoleMap[Pair(it.username, it.password)] ?: listOf()
+            }
         } catch (e: Exception) {
             listOf()
         }
