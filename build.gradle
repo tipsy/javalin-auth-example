@@ -2,7 +2,7 @@ group 'io.javalin'
 version '1.0-SNAPSHOT'
 
 buildscript {
-    ext.kotlin_version = '1.2.31'
+    ext.kotlin_version = '1.2.51'
 
     repositories {
         mavenCentral()
@@ -23,9 +23,9 @@ repositories {
 
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
-    compile "io.javalin:javalin:1.6.1"
+    compile "io.javalin:2.0.0"
     compile "com.fasterxml.jackson.module:jackson-module-kotlin:2.8.4"
-    compile "org.slf4j:slf4j-simple:1.7.22"
+    compile "org.slf4j:slf4j-simple:1.7.25"
 }
 
 compileKotlin {
