@@ -1,16 +1,15 @@
-import io.javalin.ApiBuilder.*
+import io.javalin.apibuilder.ApiBuilder.*
 import io.javalin.Javalin
-import io.javalin.security.Role.roles
+import io.javalin.security.SecurityUtil.roles
 
 fun main(args: Array<String>) {
 
     val app = Javalin.create().apply {
-        port(7000)
         accessManager(Auth::accessManager)
-    }.start()
+    }.start(7000)
 
     app.routes {
-        get("/", { ctx -> ctx.redirect("/users") })
+        get("/") { ctx -> ctx.redirect("/users") }
         path("users") {
             get(UserController::getAllUserIds, roles(ApiRole.ANYONE))
             post(UserController::createUser, roles(ApiRole.USER_WRITE))

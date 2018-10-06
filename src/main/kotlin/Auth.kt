@@ -10,7 +10,7 @@ object Auth {
     // when endpoint has Role.ANYONE, we will always handle the request
     // when the request has the permitted roles (determined by inspecting the request) we handle the request.
     // else, we set status 401
-    fun accessManager(handler: Handler, ctx: Context, permittedRoles: List<Role>) {
+    fun accessManager(handler: Handler, ctx: Context, permittedRoles: Set<Role>) {
         when {
             permittedRoles.contains(ApiRole.ANYONE) -> handler.handle(ctx)
             ctx.userRoles.any { it in permittedRoles } -> handler.handle(ctx)
