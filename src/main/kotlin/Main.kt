@@ -9,7 +9,7 @@ fun main(args: Array<String>) {
     }.start(7000)
 
     app.routes {
-        get("/") { ctx -> ctx.redirect("/users") }
+        get("/", { ctx -> ctx.redirect("/users") }, roles(ApiRole.ANYONE))
         path("users") {
             get(UserController::getAllUserIds, roles(ApiRole.ANYONE))
             post(UserController::createUser, roles(ApiRole.USER_WRITE))
