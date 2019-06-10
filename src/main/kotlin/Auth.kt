@@ -1,6 +1,6 @@
-import io.javalin.Context
-import io.javalin.Handler
-import io.javalin.security.Role
+import io.javalin.core.security.Role
+import io.javalin.http.Context
+import io.javalin.http.Handler
 
 enum class ApiRole : Role { ANYONE, USER_READ, USER_WRITE }
 

@@ -1,11 +1,11 @@
 import io.javalin.apibuilder.ApiBuilder.*
 import io.javalin.Javalin
-import io.javalin.security.SecurityUtil.roles
+import io.javalin.core.security.SecurityUtil.roles
 
-fun main(args: Array<String>) {
+fun main() {
 
-    val app = Javalin.create().apply {
-        accessManager(Auth::accessManager)
+    val app = Javalin.create{
+        it.accessManager(Auth::accessManager)
     }.start(7000)
 
     app.routes {

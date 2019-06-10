@@ -1,4 +1,4 @@
-import io.javalin.Context
+import io.javalin.http.Context
 import java.util.*
 
 object UserController {
