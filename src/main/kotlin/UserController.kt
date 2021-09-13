@@ -21,15 +21,15 @@ object UserController {
     }
 
     fun getUser(ctx: Context) {
-        ctx.json(users[ctx.pathParam(":user-id")]!!)
+        ctx.json(users[ctx.pathParam("userId")]!!)
     }
 
     fun updateUser(ctx: Context) {
-        users[ctx.pathParam(":user-id")] = ctx.bodyAsClass(User::class.java)
+        users[ctx.pathParam("userId")] = ctx.bodyAsClass(User::class.java)
     }
 
     fun deleteUser(ctx: Context) {
-        users.remove(ctx.pathParam(":user-id"))
+        users.remove(ctx.pathParam("userId"))
     }
 
     private fun randomId() = UUID.randomUUID().toString()

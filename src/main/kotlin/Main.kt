@@ -1,6 +1,5 @@
 import io.javalin.apibuilder.ApiBuilder.*
 import io.javalin.Javalin
-import io.javalin.core.security.SecurityUtil.roles
 
 fun main() {
 
@@ -9,14 +8,14 @@ fun main() {
     }.start(7000)
 
     app.routes {
-        get("/", { ctx -> ctx.redirect("/users") }, roles(ApiRole.ANYONE))
+        get("/", { ctx -> ctx.redirect("/users") }, Role.ANYONE)
         path("users") {
-            get(UserController::getAllUserIds, roles(ApiRole.ANYONE))
-            post(UserController::createUser, roles(ApiRole.USER_WRITE))
-            path(":user-id") {
-                get(UserController::getUser, roles(ApiRole.USER_READ))
-                patch(UserController::updateUser, roles(ApiRole.USER_WRITE))
-                delete(UserController::deleteUser, roles(ApiRole.USER_WRITE))
+            get(UserController::getAllUserIds, Role.ANYONE)
+            post(UserController::createUser, Role.USER_WRITE)
+            path("{userId}") {
+                get(UserController::getUser, Role.USER_READ)
+                patch(UserController::updateUser, Role.USER_WRITE)
+                delete(UserController::deleteUser, Role.USER_WRITE)
             }
         }
     }
